@@ -1,5 +1,5 @@
 import { mongooseConnect } from "@/lib/mongoose";
-import { Product } from "@/models/Product";
+import { Product } from "@/models/Course";
 import { ObjectId } from "mongodb";
 
 export default async function handler(req, res) {

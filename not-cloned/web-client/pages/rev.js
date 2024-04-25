@@ -2,7 +2,7 @@ import Featured from "@/components/Featured";
 import Listings from "@/components/Listings";
 import Header from "@/components/Header";
 import Categories from "@/components/Categories";
-import {Product} from "@/models/Product";
+import {Product} from "@/models/Course";
 import {mongooseConnect} from "@/lib/mongoose";
 import styled from "styled-components";
 import { User } from "@/models/User";
@@ -19,29 +19,29 @@ const Page = styled.div`
   padding-bottom: 100px;
 `;
 
-export default function ElectronicsPage({featuredProduct, electronics, user}) {
+export default function RevPage({featuredProduct, Rev, user}) {
   return (
     <Page>
       <Header user={user}/>
       <Featured user={user?._id} product={featuredProduct}/>
       <Categories />
-      <Listings user={user?._id} products={electronics}/>
+      <Listings user={user?._id} products={Rev}/>
     </Page>
   );
 }
 
 export async function getServerSideProps() {
-  const featuredProductId = '6606d50f0e9cd5430ad592f9';
   const tempUserId = '6606c52955e3c5a7c65fed2f'; // CHANGE THIS WHEN WE HAVE LOGIN
+  const featuredProductId = '6629c1b3af63c865390ef8cd';
   await mongooseConnect();
   const featuredProduct = await Product.findById(featuredProductId);
-  const electronics = await Product.find({category: 'electronics'}, null, {sort: {'_id':-1}, limit:10});
+  const Rev = await Product.find({topic: 'Reverse Engineering'}, null, {sort: {'_id':-1}, limit:10});
   const user = await User.findById(tempUserId);
-  
+  console.log(Rev);
   return {
     props: {
       featuredProduct: JSON.parse(JSON.stringify(featuredProduct)),
-      electronics: JSON.parse(JSON.stringify(electronics)),
+      Rev: JSON.parse(JSON.stringify(Rev)),
       user: JSON.parse(JSON.stringify(user)),
     },
   };

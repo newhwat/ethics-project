@@ -2,7 +2,7 @@ import Featured from "@/components/Featured";
 import Listings from "@/components/Listings";
 import Header from "@/components/Header";
 import Categories from "@/components/Categories";
-import {Product} from "@/models/Product";
+import {Product} from "@/models/Course";
 import { User } from "@/models/User";
 import {mongooseConnect} from "@/lib/mongoose";
 import styled from "styled-components";
@@ -31,7 +31,7 @@ export default function HomePage({featuredProduct, allProducts, user}) {
 }
 
 export async function getServerSideProps() {
-  const featuredProductId = '6606d50f0e9cd5430ad592f9';
+  const featuredProductId = '6629c1b3af63c865390ef8cd';
   const tempUserId = '6606c52955e3c5a7c65fed2f'; // CHANGE THIS WHEN WE HAVE LOGIN
   await mongooseConnect();
   const featuredProduct = await Product.findById(featuredProductId);
